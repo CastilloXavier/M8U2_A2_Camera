@@ -8,21 +8,21 @@
 
     <Button
         android:id="@+id/bt1"
-        android:layout_width="124dp"
+        android:layout_width="0dp"
         android:layout_height="51dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="184dp"
+        android:layout_marginStart="37dp"
         android:layout_marginTop="156dp"
         android:onClick="takePhoto"
         android:text="Fer foto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btPersonalitzar"
         app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgApp"
-        app:layout_constraintVertical_bias="0.172">
-    </Button>
+        app:layout_constraintVertical_bias="0.172"></Button>
 
     <Button
         android:id="@+id/bt2"
@@ -36,22 +36,22 @@
         android:text="Galeria"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.651"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgApp"
-        app:layout_constraintVertical_bias="0.172">
+        app:layout_constraintVertical_bias="0.169">
 
     </Button>
 
     <ImageView
         android:id="@+id/imgApp"
         android:layout_width="245dp"
-        android:layout_height="208dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="181dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="85dp"
+        app:layout_constraintBottom_toTopOf="@+id/btPersonalitzar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,4 +75,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/ic_menu_rotate" />
+
+    <Button
+        android:id="@+id/btPersonalitzar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="139dp"
+        android:layout_marginEnd="48dp"
+        android:text="personalitzar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bt1"
+        app:layout_constraintTop_toBottomOf="@+id/imgApp" />
 </android.support.constraint.ConstraintLayout>
