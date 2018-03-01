@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".MainActivity"
+            android:configChanges="screenSize|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,5 +19,13 @@
             </intent-filter>
         </activity>
     </application>
+    !-- L'aplicació només serà visible per dispositius amb càmera (play store) -->
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <!-- Necessari si fem un accés directe a la càmera -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- Lectura i escriptuura a la memòria externa del dispositiu -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>
