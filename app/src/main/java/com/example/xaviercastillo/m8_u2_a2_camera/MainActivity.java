@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void rotarImatge(View view) {
         ImageView imageView = (ImageView) findViewById(R.id.imgApp);
-        Bitmap reduit = redimensionar(bitmap,imageView);
-        Bitmap rotacio = rotar(bitmap,reduit);
+        Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap(); //Imatge d’un imatge view
+        Bitmap rotacio = rotar(bitmap,bitmap);
         imageView.setImageBitmap(rotacio);
     }
 
