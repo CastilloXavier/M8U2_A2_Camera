@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
@@ -58,6 +62,29 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap(); //Imatge d’un imatge view
         Bitmap rotacio = rotar(bitmap,bitmap);
         imageView.setImageBitmap(rotacio);
+    }
+
+    public void personalitzar(View view) {
+            ImageView imageView = (ImageView) findViewById(R.id.imgApp);
+            Bitmap bitmapImage = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+
+            Bitmap bitmap = Bitmap.createBitmap(bitmapImage.getWidth(), bitmapImage.getHeight(),Bitmap.Config.ARGB_8888);
+
+            Canvas canvas = new Canvas(bitmap);
+            canvas.drawBitmap(bitmapImage, 0 ,0 ,null);
+
+            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            //paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(Color.RED);
+            paint.setStrokeWidth(10);
+             canvas.drawLine(0, 0, bitmapImage.getWidth(),0 ,paint);
+             canvas.drawLine(0, 0, 0,bitmapImage.getHeight() ,paint);
+             canvas.drawLine(bitmapImage.getWidth(), bitmapImage.getHeight(), bitmapImage.getWidth(),0 ,paint);
+             canvas.drawLine(bitmapImage.getWidth(), bitmapImage.getHeight(), 0,bitmapImage.getHeight() ,paint);
+
+            //canvas.drawCircle(50,50,10,paint);
+
+            imageView.setImageBitmap(bitmap);
     }
 
 
