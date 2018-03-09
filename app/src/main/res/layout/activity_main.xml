@@ -7,17 +7,18 @@
                                              tools:context="com.example.xaviercastillo.m8_u2_a2_camera.MainActivity"
                                              tools:layout_editor_absoluteY="81dp">
 
-    <Button
+    <ImageButton
         android:id="@+id/bt1"
-        android:layout_width="124dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="takePhoto"
         android:text="Fer foto"
         app:layout_constraintBottom_toBottomOf="@+id/bt2"
         app:layout_constraintStart_toEndOf="@+id/bt2"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <Button
         android:id="@+id/bt2"
@@ -71,5 +72,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
+    <Button
+        android:id="@+id/btGuardarImatge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Button"
+        android:onClick="guardarImatge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

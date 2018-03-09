@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -35,6 +36,8 @@ import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -72,20 +75,19 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.dialog_personalitzar, null);
 
-
+        //obre un diàleg per personalitzar la imatge
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(v);
         dialog.show();
 
-        //widgets
         final EditText text_escriure = v.findViewById(R.id.text_escriure);
         final ImageView text_color = v.findViewById(R.id.text_color);
         final ImageView marc_color = v.findViewById(R.id.marc_color);
 
         Button bt_guardar_canvis = v.findViewById(R.id.bt_guardar_canvis);
 
-        //mostra els colors del text i el marc
+        //mostra els colors actuals del text i el marc
         text_color.setBackgroundColor(id_color_text);
         marc_color.setBackgroundColor(id_color_marc);
 
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 //per dibuixar el marc
                 Paint paint_marc = new Paint(Paint.ANTI_ALIAS_FLAG);
                 paint_marc.setColor(id_color_marc);
-                paint_marc.setStrokeWidth(15);
+                paint_marc.setStrokeWidth(20);
 
                 canvas.drawLine(0, 0, bitmap_actual.getWidth(),0 ,paint_marc);
                 canvas.drawLine(0, 0, 0,bitmap_actual.getHeight() ,paint_marc);
@@ -129,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 //per dibuixar el text
                 Paint paint_text = new Paint(Paint.ANTI_ALIAS_FLAG);
                 paint_text.setColor(id_color_text);
-                canvas.drawText(text_escriure.getText().toString(), 0, bitmap_nou.getHeight()/2, paint_text);
+                paint_text.setTextSize(100f);
+                canvas.drawText(text_escriure.getText().toString(), bitmap_nou.getWidth()/4, bitmap_nou.getHeight()-20, paint_text);
 
                 //Càrrega de la nova imatge a l'ImageView
                 imatge.setImageBitmap(bitmap_nou);
@@ -273,4 +276,46 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(i,GALERIA);
     }
 
+//-- guardaar imatge -------------------------------------------------------------------------------
+
+    public void guardarImatgeGaleria(Bitmap b, String nomImatge) {
+        //Creem el directori si no existeix
+        File dir = new File(Environment.getExternalStorageDirectory().toString());
+
+        if (!dir.exists()) dir.mkdirs();
+
+        //Creem l'arxiu dins de la carpeta anterior
+        File output = new File(dir, nomImatge + ".jpg");
+        OutputStream os;
+
+        try {
+            //OutputStream : Creem un nou fluxe de sortida de dades (Escriptura de bytes)
+            os = new FileOutputStream(output);
+            b.compress(Bitmap.CompressFormat.JPEG, 100, os);
+            os.flush(); //Buida el buffer de sortida escrivint el seu contingut
+            os.close();
+            Toast.makeText(this, "La imatge s'ha guardat", Toast.LENGTH_SHORT).show();
+        } catch (Exception ignored) {}
+    }
+
+    public void guardarImatge(View view) {
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.guardar_imatge, null);
+
+        //obre un diàleg per personalitzar la imatge
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(v);
+        dialog.show();
+
+        Button btGuardar = v.findViewById(R.id.bt_guardar);
+        final EditText nomImatge = v.findViewById(R.id.nom_imatge);
+
+        btGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                guardarImatgeGaleria(((BitmapDrawable) imatge.getDrawable()).getBitmap(), nomImatge.getText().toString());
+            }
+        });
+    }
 }
