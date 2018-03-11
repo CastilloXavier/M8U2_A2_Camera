@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/M8U2_A2_Camera.iml" filepath="$PROJECT_DIR$/M8U2_A2_Camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/M8_U2_A2_Camera.iml" filepath="$PROJECT_DIR$/M8_U2_A2_Camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
